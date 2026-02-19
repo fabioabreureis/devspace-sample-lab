@@ -1,0 +1,59 @@
+schemaVersion: 2.2.0
+metadata:
+  name: java17-kubedock-workspace
+  version: 1.0.0
+  displayName: Java 17 + Maven + Kubedock
+  description: Workspace Java 17 com suporte a Testcontainers via Kubedock
+
+components:
+  - name: tools
+    container:
+      image: registry.access.redhat.com/ubi8/openjdk-17
+      memoryLimit: "6Gi"
+      memoryRequest: "1Gi"
+      cpuLimit: "2"
+      cpuRequest: "200m"
+
+      env:
+        - name: DOCKER_HOST
+          value: "tcp://127.0.0.1:2475"
+
+        - name: KUBEDOCK_ENABLED
+          value: "true"
+
+        - name: KUBEDOCK_PARAMS
+          value: "--reverse-proxy --initimage joyrex2001/kubedock:0.20.3"
+
+        - name: TESTCONTAINERS_RYUK_DISABLED
+          value: "true"
+
+        - name: TESTCONTAINERS_CHECKS_DISABLE
+          value: "true"
+
+        - name: MAVEN_CONFIG
+          value: /home/user/.m2
+
+        - name: MAVEN_OPTS
+          value: "-Xmx2G"
+
+      endpoints:
+        - name: kubedock
+          exposure: none
+          protocol: tcp
+          targetPort: 2475
+
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
+
+  - name: m2
+    volume:
+      size: 5G
+
+commands:
+  - id: verify-docker
+    exec:
+      label: "Verificar Docker/Kubedock"
+      component: tools
+      commandLine: "docker version"
+      workingDir: /projects
