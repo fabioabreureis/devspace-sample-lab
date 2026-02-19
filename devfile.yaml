@@ -5,7 +5,7 @@ metadata:
 components:
   - name: dev
     container:
-      image: registry.redhat.io/devspaces/udi-rhel8:3.25
+      image: eclipse-temurin:17
       memoryLimit: "2Gi"
       cpuLimit: "1"
       env:
