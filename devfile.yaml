@@ -6,8 +6,8 @@ components:
   - name: dev
     container:
       image: quay.io/devspaces/universal-developer-image:latest
-      memoryLimit: 2Gi
-      cpuLimit: 1
+      memoryLimit: "2Gi"
+      cpuLimit: "1"
       env:
         - name: DOCKER_HOST
           value: "tcp://localhost:2475"
@@ -21,8 +21,8 @@ components:
   - name: kubedock
     container:
       image: quay.io/joyrex2001/kubedock:latest
-      memoryLimit: 512Mi
-      cpuLimit: 500m
+      memoryLimit: "512Mi"
+      cpuLimit: "500m"
       args:
         - server
         - --address
