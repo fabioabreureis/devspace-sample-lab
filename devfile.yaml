@@ -5,7 +5,7 @@ metadata:
 components:
   - name: dev
     container:
-      image: quay.io/devspaces/universal-developer-image:latest
+      image: registry.redhat.io/devspaces/udi-rhel8:3.25
       memoryLimit: "2Gi"
       cpuLimit: "1"
       env:
