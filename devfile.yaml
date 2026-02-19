@@ -20,7 +20,7 @@ components:
 
   - name: kubedock
     container:
-      image: quay.io/joyrex2001/kubedock:latest
+      image: joyrex2001/kubedock:0.20.3
       memoryLimit: "512Mi"
       cpuLimit: "500m"
       args:
